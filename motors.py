@@ -78,7 +78,7 @@ motor(0,Motor3)
 steppermotor(1,CW)
 sleep(2)
 steppermotor(1,CCW)
-
+GPIO.cleanup()
 
 
 
