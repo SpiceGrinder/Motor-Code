@@ -2,6 +2,8 @@ from werkzeug.wrappers import Request, Response
 from werkzeug.serving import run_simple
 import RPi.GPIO as GPIO
 from jsonrpc import JSONRPCResponseManager, dispatcher
+from hx711 import HX711
+import threading
 
 #setting up pins
 ########THESE LINE WILL NEED TO BE ADDED TO THE MAIN CODE TO SETUP GPIO PINS########
@@ -31,18 +33,64 @@ def motor(toggle,motor):
     if toggle == 0:
         GPIO.output(motor, GPIO.LOW)
 
+def grindSpice(motor, amount):
+    # start the motor
+    motor(motor, 1)
+
+    # Setting up scales
+    ### first param a GPIO number?
+    hx = HX711(22, 23)
+    hx.set_reading_format("MSB", "MSB")
+    hx.set_reference_unit(920)
+
+    hx.reset()
+    hx.tare()
+
+    while True:
+        try:
+            val = hx.get_weight(5)
+            val = hx.read_long()
+
+            if val >= amount:
+                break
+
+            hx.power_down()
+            hx.power_up()
+            time.sleep(0.1)
+        except (KeyboardInterrupt, SystemExit):
+            print("error with the scale")
+
+        # stop the motor
+        motor(motor, 0)
+
+class grindThread(threading.Thread):
+    def __init__(self, motor, amount):
+        threading.Thread.__init__(self)
+        self.motor = motor
+        self.amount = amount
+    def run(self):
+        grindSpice(self.motor, self.amount)
 
 
 @dispatcher.add_method
 def hello(**kwargs):
-    return 'Hello ' + kwargs['name']
+    return 'Hello ' + kwargs['name'][1]
 
 @dispatcher.add_method
 def toggle(**kwargs):
     motor(kwargs['toggle'], kwargs['motor'])
     return True
 
+@dispatcher.add_method
+def grindSpices(**kwargs):
+    threads = []
+    for spice in kwargs['spices']:
+        threads.append(grindThread(spice['grinder'], spice['amount']))
 
+    for t in threads:
+        t.join()
+
+    return "finished"
 
 @Request.application
 def application(request):
