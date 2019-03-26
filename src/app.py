@@ -18,9 +18,9 @@ Scale4 = [24, 25]
 Motor5 = 6 #set GPIO pin thats connected to fifth motor
 Scale5 = [26, 20]
 Motor6 = 7 #set GPIO pin thats connected to sixth motor
-Sleep = 16 #set GPIO pin thats connected to Sleep
-Step = 20 #set GPIO pin thats connected to Step
-Dir = 21 #set GPIO pin thats connected to Dir
+Sleep = 12 #set GPIO pin thats connected to Sleep
+Step = 13 #set GPIO pin thats connected to Step
+Dir = 14 #set GPIO pin thats connected to Dir
 CW = 1 #used for clockwise direction
 CCW = 0 #used for counter clockwise direction
 
