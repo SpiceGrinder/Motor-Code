@@ -3,15 +3,15 @@ import RPi.GPIO as GPIO
 
 #setting up pins
 ########THESE LINE WILL NEED TO BE ADDED TO THE MAIN CODE TO SETUP GPIO PINS########
-Motor1 = 5 #set GPIO pin thats connected to first motor
-Motor2 = 12 #set GPIO pin thats connected to second motor
-Motor3 = 6 #set GPIO pin thats connected to third motor
-Motor4 = 13 #set GPIO pin thats connected to fourth motor
-Motor5 = 19 #set GPIO pin thats connected to fifth motor
-Motor6 = 26 #set GPIO pin thats connected to sixth motor
-Sleep = 16 #set GPIO pin thats connected to Sleep
-Step = 20 #set GPIO pin thats connected to Step
-Dir = 21 #set GPIO pin thats connected to Dir
+Motor1 = 2 #set GPIO pin thats connected to first motor
+Motor2 = 3 #set GPIO pin thats connected to second motor
+Motor3 = 4 #set GPIO pin thats connected to third motor
+Motor4 = 5 #set GPIO pin thats connected to fourth motor
+Motor5 = 6 #set GPIO pin thats connected to fifth motor
+Motor6 = 7 #set GPIO pin thats connected to sixth motor
+Sleep = 12 #set GPIO pin thats connected to Sleep
+Step = 13 #set GPIO pin thats connected to Step
+Dir = 14 #set GPIO pin thats connected to Dir
 CW = 1 #used for clockwise direction
 CCW = 0 #used for counter clockwise direction
 
@@ -33,9 +33,9 @@ def motor(toggle,motor):
 #rotations. E.I steppermotor(.5,CW) will spin stepper motor half a rotation clockwise
 def steppermotor(rotation, direction):
     #setting up stepper motor controller
-    Sleep = 21 #set GPIO pin thats connected to Sleep
-    Step = 20 #set GPIO pin thats connected to Step
-    Dir = 16 #set GPIO pin thats connected to Dir
+    #Sleep = 21 #set GPIO pin thats connected to Sleep
+    #Step = 20 #set GPIO pin thats connected to Step
+    #Dir = 16 #set GPIO pin thats connected to Dir
     
     delay = .0005 #preset time
     SPR = 200 #preset Steps per Revolution
@@ -78,7 +78,7 @@ motor(0,Motor3)
 steppermotor(1,CW)
 sleep(2)
 steppermotor(1,CCW)
-GPIO.cleanup()
+
 
 
 
