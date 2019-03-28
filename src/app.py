@@ -67,7 +67,7 @@ def toggle_motor(toggle,motor):
 
 def grindSpice(motor, amount):
     # start the motor
-    toggle_motor(motorDict[motor]['motor'], 1)
+    toggle_motor(0, motorDict[motor]['motor'])
 
     # Setting up scales
     ### first param a GPIO number?
@@ -94,7 +94,7 @@ def grindSpice(motor, amount):
             print("error with the scale")
 
         # stop the motor
-        toggle_motor(motorDict[motor]['motor'], 0)
+        toggle_motor(0, motorDict[motor]['motor'])
 
 class grindThread(threading.Thread):
     def __init__(self, motor, amount):
@@ -118,7 +118,9 @@ def toggle(**kwargs):
 def grindSpices(**kwargs):
     threads = []
     for spice in kwargs['spices']:
-        threads.append(grindThread(spice['grinder'], spice['amount']))
+        spiceThread = grindThread(spice['grinder'], spice['amount'])
+        spiceThread.start()
+        threads.append(spiceThread)
 
     for t in threads:
         t.join()
