@@ -67,6 +67,7 @@ def toggle_motor(toggle,motor):
 
 def grindSpice(motor, amount):
     # start the motor
+    print "starting motor #", motor
     toggle_motor(0, motorDict[motor]['motor'])
 
     # Setting up scales
@@ -94,7 +95,8 @@ def grindSpice(motor, amount):
             print("error with the scale")
 
         # stop the motor
-        toggle_motor(0, motorDict[motor]['motor'])
+    print "stopping motor #", motor
+    toggle_motor(0, motorDict[motor]['motor'])
 
 class grindThread(threading.Thread):
     def __init__(self, motor, amount):
