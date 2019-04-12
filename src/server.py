@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import RPi.GPIO as GPIO
 from hx711 import HX711
 import threading
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/', methods=['POST'])
 def grind_spices():
