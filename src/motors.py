@@ -44,7 +44,7 @@ def steppermotor(rotation, direction):
     GPIO.output(Dir,direction)  #telling controller what direction to move
     
     #rotating stepper motor
-    for x in range(step_count):
+    for x in range(int(step_count)):
         GPIO.output(Step, GPIO.HIGH)
         sleep(delay)
         GPIO.output(Step, GPIO.LOW)
@@ -53,33 +53,54 @@ def steppermotor(rotation, direction):
     sleep(2) #making sure motor fully stops before turning off stepper motor controller
     GPIO.output(Sleep, GPIO.LOW)  #turning off stepper motor controller
 
+
+
+
+
+
+def wiggle(amount):
+    delay = .006 #preset time
+    SPR = 200 #preset Steps per Revolution
+    step_count = SPR * .2 #calculating how far the motor will spin
+    GPIO.output(Sleep, GPIO.HIGH)  #turning on stepper motor controller
+    GPIO.output(Dir,1)  #telling controller what direction to move
+    
+    #rotating stepper motor
+    for y in range(int(amount)):
+        GPIO.output(Dir,y%2)
+        for x in range(int(step_count)):
+            GPIO.output(Step, GPIO.HIGH)
+            sleep(delay)
+            GPIO.output(Step, GPIO.LOW)
+            sleep(delay)
+    
+    sleep(2) #making sure motor fully stops before turning off stepper motor controller
+    GPIO.output(Sleep, GPIO.LOW)  #turning off stepper motor controller
+  
 #this is a series of function calls that turns on the motors 1 by 1 until they are all turned on then turns them off to run the stepper motor for half a turn clockwise and a full turn counterclockwise
 
-motor(1,Motor1)
-sleep(1)
 motor(1,Motor2)
 sleep(1)
 motor(1,Motor3)
+#sleep(1)
+#motor(1,Motor4)
+#sleep(1)
+#motor(1,Motor5)
+#sleep(1)
+#motor(1,Motor6)
 sleep(1)
-motor(1,Motor4)
-sleep(1)
-motor(1,Motor5)
-sleep(1)
-motor(1,Motor6)
-sleep(1)
-motor(0,Motor6)
-motor(0,Motor1)
-motor(0,Motor5)
-motor(0,Motor4)
+#motor(0,Motor6)
+motor(0,Motor2)
+#motor(0,Motor5)
+#motor(0,Motor4)
 motor(0,Motor2)
 motor(0,Motor3)
 
+#steppermotor(1,CW)
+#sleep(2)
+#steppermotor(1,CCW)
 
-steppermotor(1,CW)
-sleep(2)
-steppermotor(1,CCW)
-
-
+wiggle(4)
 
 
 
