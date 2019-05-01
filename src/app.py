@@ -165,6 +165,6 @@ def cleanAndExit():
 
 
 if __name__ == '__main__':
-    run_simple('localhost', 4000, application)
+    run_simple('0.0.0.0', 4000, application)
     #except (KeyboardInterrupt, SystemExit):
     #    cleanAndExit()
