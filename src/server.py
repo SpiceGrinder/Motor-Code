@@ -55,30 +55,30 @@ GPIO.setup(Ins, GPIO.IN)
 # maping the motor with the scale
 motorDict = {
         '0': {
-            'motor': 2,
-            'scale': [15, 17],
+            'motor': Motor1,
+            'scale': Scale1,
             'reference': 6659
             },
         '1': {
-            'motor': 3,
-            'scale': [18, 27]
+            'motor': Motor2,
+            'scale': Scale2
             },
         '2': {
-            'motor': 4,
-            'scale': [22, 23],
+            'motor': Motor3,
+            'scale': Scale3,
             'reference': 6921
             },
         '3': {
-            'motor': 5,
-            'scale': [24, 25]
+            'motor': Motor4,
+            'scale': Scale4
             },
         '4': {
-            'motor': 6,
-            'scale': [19, 16]
+            'motor': Motor5,
+            'scale': Scale5
             },
         '5': {
-            'motor': 7,
-            'scale': [26, 20]
+            'motor': Motor6,
+            'scale': Scale6
             },
         }
 
