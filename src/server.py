@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import RPi.GPIO as GPIO
 from hx711 import HX711
+from time import sleep
 import threading
 
 app = Flask(__name__)
@@ -61,7 +62,8 @@ motorDict = {
             },
         '1': {
             'motor': Motor2,
-            'scale': Scale2
+            'scale': Scale2,
+            'reference': 6659
             },
         '2': {
             'motor': Motor3,
@@ -70,15 +72,18 @@ motorDict = {
             },
         '3': {
             'motor': Motor4,
-            'scale': Scale4
+            'scale': Scale4,
+            'reference': 6659
             },
         '4': {
             'motor': Motor5,
-            'scale': Scale5
+            'scale': Scale5,
+            'reference': 6659
             },
         '5': {
             'motor': Motor6,
-            'scale': Scale6
+            'scale': Scale6,
+            'reference': 6659
             },
         }
 
