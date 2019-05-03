@@ -95,9 +95,9 @@ def toggle_motor(toggle,motor):
         GPIO.output(motor, GPIO.LOW)
 
 def wiggle(amount):
-    delay = .006 #preset time
+    delay = .00055 #preset time
     SPR = 200 #preset Steps per Revolution
-    step_count = SPR * .2 #calculating how far the motor will spin
+    step_count = SPR * 1 #calculating how far the motor will spin
     GPIO.output(Sleep, GPIO.HIGH)  #turning on stepper motor controller
     GPIO.output(Dir,1)  #telling controller what direction to move
     
