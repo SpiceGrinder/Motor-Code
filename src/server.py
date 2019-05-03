@@ -94,6 +94,26 @@ def toggle_motor(toggle,motor):
     if toggle == 0:
         GPIO.output(motor, GPIO.LOW)
 
+def wiggle(amount):
+    delay = .006 #preset time
+    SPR = 200 #preset Steps per Revolution
+    step_count = SPR * .2 #calculating how far the motor will spin
+    GPIO.output(Sleep, GPIO.HIGH)  #turning on stepper motor controller
+    GPIO.output(Dir,1)  #telling controller what direction to move
+    
+    #rotating stepper motor
+    for y in range(int(amount)):
+        GPIO.output(Dir,y%2)
+        for x in range(int(step_count)):
+            GPIO.output(Step, GPIO.HIGH)
+            sleep(delay)
+            GPIO.output(Step, GPIO.LOW)
+            sleep(delay)
+    
+    sleep(2) #making sure motor fully stops before turning off stepper motor controller
+    GPIO.output(Sleep, GPIO.LOW)  #turning off stepper motor controller
+ 
+
 def grindSpice(motor, amount):
     # Setting up scales
     ### first param a GPIO number?
@@ -129,6 +149,11 @@ def grindSpice(motor, amount):
     # stop the motor
     print "stopping motor"
     toggle_motor(0, motorDict[motor]['motor'])
+
+    wiggle(4)
+    sleep(1)
+    wiggle(4)
+
 
 class grindThread(threading.Thread):
     def __init__(self, motor, amount):
