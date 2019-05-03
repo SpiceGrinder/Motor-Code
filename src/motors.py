@@ -59,9 +59,10 @@ def steppermotor(rotation, direction):
 
 
 def wiggle(amount):
-    delay = .006 #preset time
+    delay = .00055 #preset time
     SPR = 200 #preset Steps per Revolution
-    step_count = SPR * .2 #calculating how far the motor will spin
+    #step_count = SPR * .6 #calculating how far the motor will spin
+    step_count = SPR * 1 #calculating how far the motor will spin
     GPIO.output(Sleep, GPIO.HIGH)  #turning on stepper motor controller
     GPIO.output(Dir,1)  #telling controller what direction to move
     
@@ -79,27 +80,30 @@ def wiggle(amount):
   
 #this is a series of function calls that turns on the motors 1 by 1 until they are all turned on then turns them off to run the stepper motor for half a turn clockwise and a full turn counterclockwise
 
-motor(1,Motor2)
-sleep(1)
-motor(1,Motor3)
+#motor(1,Motor1)
+#motor(1,Motor2)
+#sleep(1)
+#motor(1,Motor3)
 #sleep(1)
 #motor(1,Motor4)
 #sleep(1)
 #motor(1,Motor5)
 #sleep(1)
 #motor(1,Motor6)
-sleep(1)
+#sleep(5)
 #motor(0,Motor6)
-motor(0,Motor2)
+#motor(0,Motor2)
 #motor(0,Motor5)
 #motor(0,Motor4)
-motor(0,Motor2)
-motor(0,Motor3)
+#motor(0,Motor2)
+#motor(0,Motor3)
+#motor(0,Motor1)
 
 #steppermotor(1,CW)
 #sleep(2)
 #steppermotor(1,CCW)
 
+# turns on the stepper motor
 wiggle(4)
 
 
