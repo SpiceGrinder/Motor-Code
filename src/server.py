@@ -132,7 +132,7 @@ def grindSpice(motor, amount):
 
     while True:
         try:
-            val_A = hx.get_weight_A(1)
+            val_A = abs(hx.get_weight_A(1))
             #val_B = hx.get_weight_B(5)
             print "A: %s" % ( val_A)
 
